@@ -1,0 +1,19 @@
+						(Tak/Nie)
+A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
+				/Czy ma pionowe kreski?\								
+B,D,E,F,H,I,J,K,L,M,N,P,R,T,Y 		A,C,G,O,Q,S,U,V,W,X,Z
+	/Czy ma brzuszek/i?\				 /Czy ma zaokrąglenia?\	
+B,D,P,R  E,F,H,I,J,K,L,M,N,T,Y	C,G,O,Q,S,U 		A,V,W,X,Z		
+		/Czy ma poziome kreski?\
+
+
+
+
+
+
+	
+B,E,F,H,K,L,N,R,Y	 D,I,J,P,T	 A,C,M,W,Z  	G,O,Q,S,U,V
+	/         \		   /      \		  /    \	  /      \			Czy ma kreskę poziomą?
+E,F,H,L	  B,K,N,R,Y   J,T	D,I,P	A,Z	  C,M,W   G	   O,Q,S,U,V
+ / 	  \		/    \     \     /  \    \   /   \        /       \		Symetria pozioma?
+E,H   F,L  B,K  N,R,Y  J,T  D,I  P	 A,Z C   M,W     O        Q,S,U,V
