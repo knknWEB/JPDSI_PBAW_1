@@ -1,0 +1,51 @@
+{extends file="../templates/main.html"}
+
+{block name=footer}KNKnowak. Wszystkie prawa zasrtrzeżone.{/block}
+
+{block name=content}
+
+<section style="margin: 2em;">
+	<h3>Oblicz koszta swojego kredytu: </h3>
+	<form action="{$app_url}/app/calc.php" method="post">
+		<div class="row gtr-uniform gtr-50">
+			<div class="col-4 col-12-xsmall">
+				<label for="sumCredit">Całkowita kwota kredytu: </label>
+				<input id="sumCredit" type="text" name="sum" /><br />
+			</div>
+			<div class="col-4 col-12-xsmall">
+				<label for="numberOfInstallmentCredit">Miesięczna liczba rat kredytu: </label>
+				<input id="numberOfInstallmentCredit" type="text" name="installment"  /><br />
+			</div>
+			<div class="col-4 col-12-xsmall">
+				<label for="interestCredit">Oprocentowanie (w procentach): </label>
+				<input id="interestCredit" type="text" name="interest" /><br />
+			</div>
+			<div class="col-12">
+				<ul class="actions">
+					<li><input type="submit" value="Oblicz" class="primary" /></li>
+					<li><input type="reset" value="Reset" /></li>
+				</ul>
+			</div>
+
+			<div class="table-wrapper">
+			
+                {if isset($messages)}
+                    {if count($messages) > 0} 
+                        <h4>Wystąpiły błędy: </h4>
+                        <ol class="err">
+                        {foreach  $messages as $msg}
+                        {strip}
+                            <li>{$msg}</li>
+                        {/strip}
+                        {/foreach}
+                        </ol>
+                    {/if}
+                {/if}
+
+			{if (isset($resultSumMonthly)&&isset($resultCredit))}
+			<table><thead><tr><th>Podsumowanie:</th></tr></thead><tr><td>Twoja miesięczna rata:</td><td>{$resultSumMonthly} złotych</td></tr>
+				<tr><td>Całkowity koszt kredytu:</td><td>{$resultCredit} złotych</td></tr></table></div>
+			{/if}
+            </div>
+
+{/block}
