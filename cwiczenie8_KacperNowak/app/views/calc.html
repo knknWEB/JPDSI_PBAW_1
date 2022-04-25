@@ -1,0 +1,63 @@
+{extends file="website.html"}
+{block name=info}Kacper Nowak - PAW2 rok 2021/2022 Informatyka inżynierska{/block}
+{block name=footer}KNKnowak. Wszystkie prawa zasrtrzeżone.{/block}
+
+{block name=content}
+
+<section style="margin: 2em;">
+	<h3>Oblicz koszta swojego kredytu: </h3>
+	<form action="{$conf->action_root}calcCompute" method="post">
+		<div class="row gtr-uniform gtr-50">
+			<div class="col-4 col-12-xsmall">
+				<label for="sumCredit">Całkowita kwota kredytu: </label>
+				<input id="sumCredit" type="text" name="sum" value="{$form->sum}" /><br />
+			</div>
+			<div class="col-4 col-12-xsmall">
+				<label for="numberOfInstallmentCredit">Miesięczna liczba rat kredytu: </label>
+				<input id="numberOfInstallmentCredit" type="text" name="installment" value="{$form->installment}" /><br />
+			</div>
+			<div class="col-4 col-12-xsmall">
+				<label for="interestCredit">Oprocentowanie (w procentach): </label>
+				<input id="interestCredit" type="text" name="interest" value="{$form->interest}" /><br />
+			</div>
+			<div class="col-12">
+				<ul class="actions">
+					<li><input type="submit" value="Oblicz" class="primary" /></li>
+					<li><input type="reset" value="Reset" /></li>
+				</ul>
+			</div>
+
+			<div class="table-wrapper">
+
+				
+				{if $msgs->isError()}
+					<h4>Wystąpiły błędy: </h4>
+					<ol class="err">
+					{foreach $msgs->getErrors() as $err}
+					{strip}
+						<li>{$err}</li>
+					{/strip}
+					{/foreach}
+					</ol>
+				{/if}
+				
+				{if $msgs->isInfo()}
+					<h4>Informacje: </h4>
+					<ol class="inf">
+					{foreach $msgs->getInfos() as $inf}
+					{strip}
+						<li>{$inf}</li>
+					{/strip}
+					{/foreach}
+					</ol>
+				{/if}
+								
+
+			{if (isset($form->resultCredit) && isset($form->resultSum))}
+
+			<table><thead><tr><th>Podsumowanie:</th></tr></thead><tr><td>Twoja miesięczna rata:</td><td>{$form->resultSum} złotych</td></tr>
+				<tr><td>Całkowity koszt kredytu:</td><td>{$form->resultCredit} złotych</td></tr></table></div>
+			{/if}
+            </div>
+
+{/block}
