@@ -1,9 +1,12 @@
 {extends file="main.tpl"}
-{block name=about}
-<br />
- <section id="recent-blog-posts" class="recent-blog-posts">
-      <div class="container" data-aos="fade-up">
-      <h3>Uzupełnij ankietę członkostwa:</h3>
+{block name=hero} 
+    <section class="breadcrumbs">
+        <div class="container">
+            <h1 >Uzupełnij ankietę członkostwa: </h1>
+        </div>
+    </section>
+    <section id="hero" class="hero d-flex ">
+        <div class="container" data-aos="fade-up">
          <form action="{$conf->action_root}quest" method="post" class="pure-form bottom-margin">
             <fieldset>
                 <div class="col-lg-6 ">
@@ -23,26 +26,10 @@
                      
                     </textarea>
                 </div>
-                <div class="pure-controls">
-                    <input type="submit" value="Zatwierdź!" class="pure-button pure-button-primary"/>
+                <div class="col-lg-12">
+                    <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Dołącz do nas!<i class="bi bi-arrow-right"></i></button>
                 </div>
-                <div>
-                    {block name=messages}
-
-                    {if $msgs->isMessage()}
-                    <div class="messages bottom-margin">
-                        <ul>
-                        {foreach $msgs->getMessages() as $msg}
-                        {strip}
-                            <li class="msg {if $msg->isError()}error{/if} {if $msg->isWarning()}warning{/if} {if $msg->isInfo()}info{/if}">{$msg->text}</li>
-                        {/strip}
-                        {/foreach}
-                        </ul>
-                    </div>
-                    {/if}
-
-                    {/block}
-                </div>
+                {include file="messages.tpl"}
             </fieldset>
         </form>	
 

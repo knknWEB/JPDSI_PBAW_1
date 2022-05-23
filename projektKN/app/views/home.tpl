@@ -1,9 +1,10 @@
 {extends file="main.tpl"}
-{block name=hero} 
+{block name=hero}  
+  {include file="messages.tpl"}
   <section id="hero" class="hero d-flex align-items-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center">
+  <div class="container"> 
+  <div class="row">
+  <div class="col-lg-6 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">Chrońmy nasze zdrowie!</h1>
           <h2 data-aos="fade-up" data-aos-delay="400">Nie pozwólmy niszczyć naszego zdrowia i mienia! Przerwijmy ten proceder!</h2>
           <div data-aos="fade-up" data-aos-delay="600">
@@ -20,10 +21,12 @@
         </div>
       </div>
     </div>
+
 </section>
 
 {/block}
 {block name=about} 
+  
     <section id="about" class="about">
 
         <div class="container" data-aos="fade-up">
@@ -38,7 +41,7 @@
                     Wielu z mieszkańców Zawiercia ma problem z opiłkami, które osiadają na wszystkich powierzchniach i tworzą szorstką powłokę, której nie można zmyć w domowych warunkach. Zniszczone dachy, panele fotowoltaiczne, okna, ogrodzenia, samochody, ulice, chodniki, kosze na śmieci… tych rzeczy jest znacznie więcej!
                 </p>
                 <div class="text-center text-lg-start">
-                    <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                    <a href="{$conf->action_root}news" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
                     <span>Czytaj więcej</span>
                     <i class="bi bi-arrow-right"></i>
                     </a>

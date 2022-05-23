@@ -56,15 +56,16 @@ class QuestCtrl {
                     "Description"=>  $this->form->description,
                     "UsersLogin"=> $this->user
                     ]);
-                } catch (\PDOException $e) {
-                    Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów');
-                    if (App::getConf()->debug)
+                    App::getMessages()->addMessage(new \core\Message("Poprawnie wypełniono ankietę członkostwa!!", \core\Message::INFO));
+                    App::getRouter()->forwardTo('panel');
+                } catch (\PDOException $e) { 
+                    Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
+                    if (App::getConf()->debug){
                         Utils::addErrorMessage($e->getMessage());
+                        App::getRouter()->forwardTo('panel');
+                    }
+                    App::getRouter()->forwardTo('panel');
                 }
-                Utils::addErrorMessage('Wypełniono ankitę!');
-                $this->generateView();
-                //zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
-                //App::getRouter()->redirectTo("panel");
             } else {
                 //niezalogowany => pozostań na stronie logowania
                 Utils::addErrorMessage('Nie dziala walidacja!');
@@ -83,21 +84,7 @@ class QuestCtrl {
 
     }
 
-        // try {
-        //     $this->records = App::getDB()->select("users", [
-        //         "Name",
-        //         "Surname",
-        //         "Login",
-        //         "Mail",
-        //         "Role"
-        //             ]);
-        // } catch (\PDOException $e) {
-        //     Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów');
-        //     if (App::getConf()->debug)
-        //         Utils::addErrorMessage($e->getMessage());
-        // }
-        //     $this->generateView();
-        // }
+       
     public function generateView() {
         App::getSmarty()->display('questView.tpl');
     }

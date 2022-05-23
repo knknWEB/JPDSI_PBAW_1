@@ -8,15 +8,13 @@ use core\Utils;
 
 
 class HomePageCtrl {
-    private $form; //dane formularza wyszukiwania
-    private $records; //rekordy pobrane z bazy danych
     public function action_home()
     {
-
-    
-
-
-        // 4. wygeneruj widok
         App::getSmarty()->display('home.tpl');
     }
+    public function action_news()
+    {
+        App::getSmarty()->display('news.tpl');
+    }
+
 }

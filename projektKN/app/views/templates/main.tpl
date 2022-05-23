@@ -21,7 +21,7 @@
   <link href="{$conf->app_url}/vendor/aos/aos.css" rel="stylesheet">
   <link href="{$conf->app_url}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="{$conf->app_url}/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="{$conf->app_url}vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="{$conf->app_url}/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="{$conf->app_url}/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="{$conf->app_url}/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
@@ -49,10 +49,11 @@
     
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">Główna</a></li>
-              <li><a class="nav-link scrollto" href="#about">O nas</a></li>  
-              <li><a href="blog.html">Blog</a></li>
-              <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+              <li><a class="nav-link scrollto active" href="{$conf->action_root}">Główna</a></li>
+              <li><a class="nav-link scrollto" href="{$conf->action_root}news">Aktualności</a></li>  
+              <li><a href="{$conf->action_root}shop">Sklep</a></li>
+              <li><a href="#footer">Kontakt</a></li>
+              {* <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                   <li><a href="#">Drop Down 1</a></li>
                   <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
@@ -68,7 +69,7 @@
                   <li><a href="#">Drop Down 3</a></li>
                   <li><a href="#">Drop Down 4</a></li>
                 </ul>
-              </li>
+              </li> *}
               <li>
               <li>
                 {if count($conf->roles)>0}
@@ -103,28 +104,28 @@
     <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
+          <div class="col-lg-6 col-md-12 footer-info">
             <a href="{$conf->app_url}" class="logo d-flex align-items-center">
                <img src="{$conf->app_url}/img/logoWWW.png" alt="stopdlaodlewni.pl" >
             </a>
-            <p>Zarejestrowane Stowarzyszenie STOP DLA ODLEWNI. Powstrzymanie emisyjności pyłów.</p>
+            <p>Zarejestrowane Stowarzyszenie STOP DLA ODLEWNI. Celem działań jest powstrzymanie emisyjności pyłów, mających wydobwać się z Odlewni Zawiercie S.A.</p>
             <div class="social-links mt-3">
               <a href="https://www.facebook.com/stopdlaodlewni" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://github.com/knknWEB/JPDSI_PBAW_1" class="github"><i class="bi bi-github"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
+          <div class="col-lg-3 col-6 footer-links text-center text-md-start">
             <h4>Menu</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Strona główna</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{$conf->action_root}">Strona główna</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{$conf->action_root}news">Aktualności</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{$conf->action_root}login">Logowanie</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="{$conf->action_root}register">Rejestracja</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
+          {* <div class="col-lg-2 col-6 footer-links">
             <h4>Our Services</h4>
             <ul>
               <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
@@ -133,12 +134,13 @@
               <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
               <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
             </ul>
-          </div>
+          </div> *}
 
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Dane</h4>
+            <h4>Dane kontaktowe</h4>
             <p>
               Stowarzyszenie <strong>STOP DLA ODLEWNI</strong> <br>
+              ul. Senatorska 8<br>
               Zawiercie, 42-400<br>
               <strong>REGON:</strong> 521843465<br><br>
               <strong>Telefon:</strong> +48 732 313 398<br>
@@ -153,7 +155,9 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>stopdlaodlewni.pl</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>stopdlaodlewni.pl</span></strong>. All Rights Reserved<br>
+        Projekt zaliczeniowy <strong><span>Kacper Nowak PAW2</span></strong>
+
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

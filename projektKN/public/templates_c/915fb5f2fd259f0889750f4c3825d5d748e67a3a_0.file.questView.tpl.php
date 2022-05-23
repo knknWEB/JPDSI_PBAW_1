@@ -1,83 +1,54 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-09 11:37:35
+/* Smarty version 4.1.0, created on 2022-05-22 16:17:36
   from 'C:\xampp\htdocs\projektKN\app\views\questView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6278e0df92f244_67332835',
+  'unifunc' => 'content_628a460026b6c8_60193882',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '915fb5f2fd259f0889750f4c3825d5d748e67a3a' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\questView.tpl',
-      1 => 1652089053,
+      1 => 1653229055,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:messages.tpl' => 1,
   ),
 ),false)) {
-function content_6278e0df92f244_67332835 (Smarty_Internal_Template $_smarty_tpl) {
+function content_628a460026b6c8_60193882 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_18890799256278e0df9171d2_95307687', 'about');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_460168841628a46002630e5_86161846', 'hero');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
-/* {block 'messages'} */
-class Block_13660421206278e0df91bd67_63514541 extends Smarty_Internal_Block
-{
-public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
-?>
-
-
-                    <?php if ($_smarty_tpl->tpl_vars['msgs']->value->isMessage()) {?>
-                    <div class="messages bottom-margin">
-                        <ul>
-                        <?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['msgs']->value->getMessages(), 'msg');
-$_smarty_tpl->tpl_vars['msg']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['msg']->value) {
-$_smarty_tpl->tpl_vars['msg']->do_else = false;
-?>
-                        <li class="msg <?php if ($_smarty_tpl->tpl_vars['msg']->value->isError()) {?>error<?php }?> <?php if ($_smarty_tpl->tpl_vars['msg']->value->isWarning()) {?>warning<?php }?> <?php if ($_smarty_tpl->tpl_vars['msg']->value->isInfo()) {?>info<?php }?>"><?php echo $_smarty_tpl->tpl_vars['msg']->value->text;?>
-</li>
-                        <?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-                        </ul>
-                    </div>
-                    <?php }?>
-
-                    <?php
-}
-}
-/* {/block 'messages'} */
-/* {block 'about'} */
-class Block_18890799256278e0df9171d2_95307687 extends Smarty_Internal_Block
+/* {block 'hero'} */
+class Block_460168841628a46002630e5_86161846 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
-  'about' => 
+  'hero' => 
   array (
-    0 => 'Block_18890799256278e0df9171d2_95307687',
-  ),
-  'messages' => 
-  array (
-    0 => 'Block_13660421206278e0df91bd67_63514541',
+    0 => 'Block_460168841628a46002630e5_86161846',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
-
-<br />
- <section id="recent-blog-posts" class="recent-blog-posts">
-      <div class="container" data-aos="fade-up">
-      <h3>Uzupełnij ankietę członkostwa:</h3>
+ 
+    <section class="breadcrumbs">
+        <div class="container">
+            <h1 >Uzupełnij ankietę członkostwa: </h1>
+        </div>
+    </section>
+    <section id="hero" class="hero d-flex ">
+        <div class="container" data-aos="fade-up">
          <form action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 quest" method="post" class="pure-form bottom-margin">
             <fieldset>
@@ -98,15 +69,11 @@ quest" method="post" class="pure-form bottom-margin">
                      
                     </textarea>
                 </div>
-                <div class="pure-controls">
-                    <input type="submit" value="Zatwierdź!" class="pure-button pure-button-primary"/>
+                <div class="col-lg-12">
+                    <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Dołącz do nas!<i class="bi bi-arrow-right"></i></button>
                 </div>
-                <div>
-                    <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13660421206278e0df91bd67_63514541', 'messages', $this->tplIndex);
+                <?php $_smarty_tpl->_subTemplateRender("file:messages.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-
-                </div>
             </fieldset>
         </form>	
 
@@ -116,5 +83,5 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_13660421206278e0df
 <?php
 }
 }
-/* {/block 'about'} */
+/* {/block 'hero'} */
 }

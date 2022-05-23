@@ -4,6 +4,8 @@ namespace app\controllers;
 
 use core\App;
 use core\Utils;
+use core\Messages;
+use core\Message;
 use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
@@ -40,87 +42,12 @@ class LoginCtrl {
             "AND" => [
             "Login" => $this->form->login],
             "Password" => $this->form->pass, ])){
-            RoleUtils::addRole('user');
+            RoleUtils::addRole('logged');
             SessionUtils::storeObject('Login', $this->form->login); 
         } 
         else{
             Utils::addErrorMessage('Błędny login lub hasło!');   
         }
-
-
-
-        // if (App::getMessages()->isError())
-        //     return false;
-
-        //     if (!App::getMessages()->isError()) {
-        //     try {
-        //         $this->records = App::getDB()->select("users", [
-        //             "Login",
-        //             "Password"
-        //                 ], ["Login" => $this->form->login]);
-        //     } catch (\PDOException $e) {
-        //         Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów');
-        //         if (App::getConf()->debug)
-        //             Utils::addErrorMessage($e->getMessage());
-        //     }
-
-
-
-        //     if (password_verify($this->form->pass, $this->records[0]["Password"])) 
-        //     {
-
-        //         RoleUtils::addRole('user');
-               
-              
-        //     }
-        // }
-
-            // if (!App::getMessages()->isError()) {
-            //     $hashed_pwd = App::getDB('users', null, 'Password', [
-            //                 'Login' => $this->form->login
-            //     ]);
-    
-            //     if (password_verify($this->form->pass, $this->records[0]["Password"])) 
-            //     {
-    
-            //         RoleUtils::addRole('user');
-                   
-                  
-            //     }
-            //      else {
-            //         Utils::addErrorMessage('Niepoprawny login lub hasło!');
-            //     }
-            // }
-
-
-        // //łączenie z BD
-        // try {
-        //     $this->records = App::getDB()->select("users", [
-        //         "Login",
-        //         "Password"
-        //     ], [
-        //         "Login" => $this->form->login,
-        //     ]);
-        // } catch (Exception $e) {
-        //     echo $e;
-        // }
-
-
-        // if ($this->records != null && password_verify($this->form->pass, $this->records[0]["Password"])) {
-        //     RoleUtils::addRole('user');
-        // } else {
-        //     Utils::addErrorMessage('Niepoprawny login lub hasło');
-        // }
-
-
-        // // (takie informacje najczęściej przechowuje się w bazie danych)
-        // if ($this->form->login == "admin" && $this->form->pass == "admin") {
-        //     RoleUtils::addRole('admin');
-        // } else if ($this->form->login == "user" && $this->form->pass == "user") {
-        //     RoleUtils::addRole('user');
-        // } else {
-        //     Utils::addErrorMessage('Niepoprawny login lub hasło');
-        // }
 
         return !App::getMessages()->isError();
     }
@@ -131,9 +58,10 @@ class LoginCtrl {
 
     public function action_login() {
         if ($this->validate()) {
-            //zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
-            Utils::addErrorMessage('Poprawnie zalogowano do systemu');
-            App::getRouter()->redirectTo("home");
+            //zalogowany => przekieruj na główną akcję (z przekazaniem messages)
+            App::getMessages()->addMessage(new \core\Message("Poprawnie zalogowano!", \core\Message::INFO));
+            App::getRouter()->forwardTo('panel');
+            
         } else {
             //niezalogowany => pozostań na stronie logowania
             $this->generateView();
@@ -142,9 +70,11 @@ class LoginCtrl {
 
     public function action_logout() {
         // 1. zakończenie sesji
+        session_unset();
         session_destroy();
-        // 2. idź na stronę główną - system automatycznie przekieruje do strony logowania
-        App::getRouter()->redirectTo('home');
+       
+        App::getMessages()->addMessage(new \core\Message("Wylogowano!", \core\Message::INFO));
+        App::getRouter()->forwardTo('home');
     }
 
     public function generateView() {

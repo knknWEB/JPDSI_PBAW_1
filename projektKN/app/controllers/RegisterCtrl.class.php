@@ -99,9 +99,8 @@ class RegisterCtrl {
                 if (App::getConf()->debug)
                     Utils::addErrorMessage($e->getMessage());
             }
-            Utils::addErrorMessage('Poprawnie zalogowano do systemu');
-            //zalogowany => przekieruj na główną akcję (z przekazaniem messages przez sesję)
-            App::getRouter()->redirectTo("home");
+            App::getMessages()->addMessage(new \core\Message("'Poprawnie zarejestrowano! Teraz zaloguj się!'", \core\Message::INFO));
+            App::getRouter()->forwardTo('home');
         } else {
             //niezalogowany => pozostań na stronie logowania
             $this->generateView();
@@ -113,6 +112,7 @@ class RegisterCtrl {
     public function generateView() {
         App::getSmarty()->assign('form', $this->form); // dane formularza do widoku
         App::getSmarty()->display('RegisterView.tpl');
+        
     }
 
 }

@@ -9,6 +9,7 @@ App::getRouter()->setLoginRoute('login'); // akcja/ścieżka na potrzeby logowan
 //App::getRouter()->setRegisterRoute('register'); // akcja/ścieżka na potrzeby logowania (przekierowanie, gdy nie ma dostępu)
 
 Utils::addRoute('home', 'HomePageCtrl');
+Utils::addRoute('news',     'HomePageCtrl');
 Utils::addRoute('loginShow',     'LoginCtrl');
 Utils::addRoute('login',         'LoginCtrl');
 Utils::addRoute('logout',        'LoginCtrl');
@@ -17,4 +18,8 @@ Utils::addRoute('register',     'RegisterCtrl');
 Utils::addRoute('panel',     'PanelCtrl');
 Utils::addRoute('questView',     'QuestCtrl');
 Utils::addRoute('quest',     'QuestCtrl');
+Utils::addRoute('address',     'AddressCtrl');
+Utils::addRoute('addressView',     'AddressCtrl');
+Utils::addRoute('shop',     'ShopCtrl');
+Utils::addRoute('shopBuy',     'ShopCtrl');
 //Utils::addRoute('action_name', 'controller_class_name');

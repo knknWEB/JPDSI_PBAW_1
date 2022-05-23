@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-16 19:09:50
+/* Smarty version 4.1.0, created on 2022-05-23 12:33:33
   from 'C:\xampp\htdocs\projektKN\app\views\templates\main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6282855ee82f78_17860987',
+  'unifunc' => 'content_628b62fdc70a39_26908237',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ff6c1afb8dc941a5d492d2a40736bdbf7522ae27' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\templates\\main.tpl',
-      1 => 1652720736,
+      1 => 1653302011,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6282855ee82f78_17860987 (Smarty_Internal_Template $_smarty_tpl) {
+function content_628b62fdc70a39_26908237 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, false);
 ?>
@@ -53,7 +53,7 @@ $_smarty_tpl->inheritance->init($_smarty_tpl, false);
   <link href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 /vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
-vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 /vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
@@ -86,27 +86,14 @@ vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
     
           <nav id="navbar" class="navbar">
             <ul>
-              <li><a class="nav-link scrollto active" href="#hero">Główna</a></li>
-              <li><a class="nav-link scrollto" href="#about">O nas</a></li>  
-              <li><a href="blog.html">Blog</a></li>
-              <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="#">Drop Down 1</a></li>
-                  <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                    <ul>
-                      <li><a href="#">Deep Drop Down 1</a></li>
-                      <li><a href="#">Deep Drop Down 2</a></li>
-                      <li><a href="#">Deep Drop Down 3</a></li>
-                      <li><a href="#">Deep Drop Down 4</a></li>
-                      <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="#">Drop Down 2</a></li>
-                  <li><a href="#">Drop Down 3</a></li>
-                  <li><a href="#">Drop Down 4</a></li>
-                </ul>
-              </li>
-              <li>
+              <li><a class="nav-link scrollto active" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+">Główna</a></li>
+              <li><a class="nav-link scrollto" href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+news">Aktualności</a></li>  
+              <li><a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+shop">Sklep</a></li>
+              <li><a href="#footer">Kontakt</a></li>
+                            <li>
               <li>
                 <?php if (count($_smarty_tpl->tpl_vars['conf']->value->roles) > 0) {?>
                  <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
@@ -132,17 +119,17 @@ loginShow" class="getstarted">Zaloguj</a>
   </header><!-- End Header -->
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_6243262756282855ee71619_03323656', 'hero');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_705276162628b62fdc59006_72867866', 'hero');
 ?>
 
 
  <main id="main">
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_14526076026282855ee73047_09165133', 'about');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1078145759628b62fdc5b407_90352525', 'about');
 ?>
 
     <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16968107266282855ee74433_13584145', 'values');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_2115494271628b62fdc5c9a0_43725609', 'values');
 ?>
 
  </main>
@@ -152,44 +139,39 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16968107266282855e
     <div class="footer-top">
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-5 col-md-12 footer-info">
+          <div class="col-lg-6 col-md-12 footer-info">
             <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 " class="logo d-flex align-items-center">
                <img src="<?php echo $_smarty_tpl->tpl_vars['conf']->value->app_url;?>
 /img/logoWWW.png" alt="stopdlaodlewni.pl" >
             </a>
-            <p>Zarejestrowane Stowarzyszenie STOP DLA ODLEWNI. Powstrzymanie emisyjności pyłów.</p>
+            <p>Zarejestrowane Stowarzyszenie STOP DLA ODLEWNI. Celem działań jest powstrzymanie emisyjności pyłów, mających wydobwać się z Odlewni Zawiercie S.A.</p>
             <div class="social-links mt-3">
               <a href="https://www.facebook.com/stopdlaodlewni" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://github.com/knknWEB/JPDSI_PBAW_1" class="github"><i class="bi bi-github"></i></a>
             </div>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
+          <div class="col-lg-3 col-6 footer-links text-center text-md-start">
             <h4>Menu</h4>
             <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Strona główna</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+">Strona główna</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+news">Aktualności</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+login">Logowanie</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+register">Rejestracja</a></li>
             </ul>
           </div>
 
-          <div class="col-lg-2 col-6 footer-links">
-            <h4>Our Services</h4>
-            <ul>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
-            </ul>
-          </div>
-
+          
           <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-            <h4>Dane</h4>
+            <h4>Dane kontaktowe</h4>
             <p>
               Stowarzyszenie <strong>STOP DLA ODLEWNI</strong> <br>
+              ul. Senatorska 8<br>
               Zawiercie, 42-400<br>
               <strong>REGON:</strong> 521843465<br><br>
               <strong>Telefon:</strong> +48 732 313 398<br>
@@ -204,7 +186,9 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16968107266282855e
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>stopdlaodlewni.pl</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>stopdlaodlewni.pl</span></strong>. All Rights Reserved<br>
+        Projekt zaliczeniowy <strong><span>Kacper Nowak PAW2</span></strong>
+
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
@@ -258,12 +242,12 @@ $_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16968107266282855e
 
 </html><?php }
 /* {block 'hero'} */
-class Block_6243262756282855ee71619_03323656 extends Smarty_Internal_Block
+class Block_705276162628b62fdc59006_72867866 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'hero' => 
   array (
-    0 => 'Block_6243262756282855ee71619_03323656',
+    0 => 'Block_705276162628b62fdc59006_72867866',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -273,12 +257,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'hero'} */
 /* {block 'about'} */
-class Block_14526076026282855ee73047_09165133 extends Smarty_Internal_Block
+class Block_1078145759628b62fdc5b407_90352525 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'about' => 
   array (
-    0 => 'Block_14526076026282855ee73047_09165133',
+    0 => 'Block_1078145759628b62fdc5b407_90352525',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -288,12 +272,12 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'about'} */
 /* {block 'values'} */
-class Block_16968107266282855ee74433_13584145 extends Smarty_Internal_Block
+class Block_2115494271628b62fdc5c9a0_43725609 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'values' => 
   array (
-    0 => 'Block_16968107266282855ee74433_13584145',
+    0 => 'Block_2115494271628b62fdc5c9a0_43725609',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
