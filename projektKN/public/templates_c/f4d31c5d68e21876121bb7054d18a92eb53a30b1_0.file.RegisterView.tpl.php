@@ -1,42 +1,42 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-22 16:03:16
+/* Smarty version 4.1.0, created on 2022-05-28 14:38:46
   from 'C:\xampp\htdocs\projektKN\app\views\RegisterView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_628a42a4d20307_41240732',
+  'unifunc' => 'content_629217d6305a94_82837943',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f4d31c5d68e21876121bb7054d18a92eb53a30b1' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\RegisterView.tpl',
-      1 => 1653228194,
+      1 => 1653741524,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:messages.tpl' => 1,
+    'file:messagesForm.tpl' => 1,
   ),
 ),false)) {
-function content_628a42a4d20307_41240732 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629217d6305a94_82837943 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1487733582628a42a4d10f53_88853620', 'hero');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_683525936629217d62f7d38_39972937', 'hero');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'hero'} */
-class Block_1487733582628a42a4d10f53_88853620 extends Smarty_Internal_Block
+class Block_683525936629217d62f7d38_39972937 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'hero' => 
   array (
-    0 => 'Block_1487733582628a42a4d10f53_88853620',
+    0 => 'Block_683525936629217d62f7d38_39972937',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -82,19 +82,18 @@ register" method="post" class="pure-form bottom-margin">
                         <input type="password" id="id_pass2" class="form-control" name="pass2" placeholder="Hasło" required><br>
                     </div>
                     <div class="col-lg-12">
-                        <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Zaloguj się<i class="bi bi-arrow-right"></i></button>
+                        <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Zarejestruj się<i class="bi bi-arrow-right"></i></button>
                     </div>
-                        <?php $_smarty_tpl->_subTemplateRender("file:messages.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
-?>
                 </fieldset>
             </form>	
+            <?php $_smarty_tpl->_subTemplateRender("file:messagesForm.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+?>
             <div class="col-lg-12 d-flex flex-column justify-content-center">
                 <h3>Masz już konto? <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 loginShow">Zaloguj się!<a> </h3>
             </div>
-
-
     </section>
+    
 <?php
 }
 }

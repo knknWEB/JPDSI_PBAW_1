@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-28 17:17:55
-  from 'C:\xampp\htdocs\projektKN\app\views\templates\messages.tpl' */
+/* Smarty version 4.1.0, created on 2022-05-28 14:38:01
+  from 'C:\xampp\htdocs\projektKN\app\views\templates\messagesForm.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_62923d23316dd8_54303979',
+  'unifunc' => 'content_629217a95a51a8_51158688',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'd7c29de0c8097ed112f5d3ad60d527ebd356689a' => 
+    'b03b9b3698433f80add4338a01521523e20d78b7' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\templates\\messages.tpl',
-      1 => 1653751073,
+      0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\templates\\messagesForm.tpl',
+      1 => 1653741465,
       2 => 'file',
     ),
   ),
@@ -20,11 +20,10 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_62923d23316dd8_54303979 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629217a95a51a8_51158688 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['msgs']->value->isMessage()) {?>
-    <section class="breadcrumbs">
+    <section>
         <div class="container" data-aos="fade-up">
-        <h2> Dostępne wiadomości: </h2>
             <header class="section-header">
                 <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['msgs']->value->getMessages(), 'msg');

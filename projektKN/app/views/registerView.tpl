@@ -35,15 +35,14 @@
                         <input type="password" id="id_pass2" class="form-control" name="pass2" placeholder="Hasło" required><br>
                     </div>
                     <div class="col-lg-12">
-                        <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Zaloguj się<i class="bi bi-arrow-right"></i></button>
+                        <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Zarejestruj się<i class="bi bi-arrow-right"></i></button>
                     </div>
-                        {include file="messages.tpl"}
                 </fieldset>
             </form>	
+            {include file="messagesForm.tpl"}
             <div class="col-lg-12 d-flex flex-column justify-content-center">
                 <h3>Masz już konto? <a href="{$conf->action_root}loginShow">Zaloguj się!<a> </h3>
             </div>
-
-
     </section>
+    
 {/block}

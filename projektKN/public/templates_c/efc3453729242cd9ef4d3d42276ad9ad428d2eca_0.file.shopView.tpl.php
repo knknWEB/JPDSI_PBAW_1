@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-23 12:43:06
+/* Smarty version 4.1.0, created on 2022-05-28 18:52:42
   from 'C:\xampp\htdocs\projektKN\app\views\shopView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_628b653a9b9fd5_74457639',
+  'unifunc' => 'content_6292535a6a4558_65338083',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'efc3453729242cd9ef4d3d42276ad9ad428d2eca' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\shopView.tpl',
-      1 => 1653302526,
+      1 => 1653756761,
       2 => 'file',
     ),
   ),
@@ -20,26 +20,26 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_628b653a9b9fd5_74457639 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6292535a6a4558_65338083 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_129427938628b653a99fb79_31839881', 'hero');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17020005496292535a68b225_17003785', 'hero');
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1540892723628b653a9a1868_87895863', "about");
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_16834313116292535a68ce35_71345286', "about");
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'hero'} */
-class Block_129427938628b653a99fb79_31839881 extends Smarty_Internal_Block
+class Block_17020005496292535a68b225_17003785 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'hero' => 
   array (
-    0 => 'Block_129427938628b653a99fb79_31839881',
+    0 => 'Block_17020005496292535a68b225_17003785',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -55,18 +55,17 @@ public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 }
 /* {/block 'hero'} */
 /* {block "about"} */
-class Block_1540892723628b653a9a1868_87895863 extends Smarty_Internal_Block
+class Block_16834313116292535a68ce35_71345286 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'about' => 
   array (
-    0 => 'Block_1540892723628b653a9a1868_87895863',
+    0 => 'Block_16834313116292535a68ce35_71345286',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
 ?>
 
-<!-- ======= Pricing Section ======= -->
 <section id="pricing" class="pricing">
 
 <div class="container" data-aos="fade-up">
@@ -89,10 +88,11 @@ $_smarty_tpl->tpl_vars['p']->do_else = false;
 /img/shop/<?php echo $_smarty_tpl->tpl_vars['p']->value["ProductId"];?>
 .png" /><ul><li>stopdlaodlewni.pl</li><li>Rozmiar: <b><?php echo $_smarty_tpl->tpl_vars['p']->value["Type"];?>
 </b></li><li>Ilość w opakowaniu: <?php echo $_smarty_tpl->tpl_vars['p']->value["QuantityInPackage"];?>
-</li></ul><form action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
-shopBuy" method="post" class="pure-form bottom-margin"><div class="col-lg-12"><input type="hidden" value="<?php echo $_smarty_tpl->tpl_vars['p']->value["Price"];?>
-" name="price"><button type="submit" value="<?php echo $_smarty_tpl->tpl_vars['p']->value["ProductId"];?>
-" name="produktid" class="btn-buy">Zamów teraz!<i class="bi bi-arrow-right"></i></button></div></form></div></div>
+</li></ul><a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+shopBuy/<?php echo $_smarty_tpl->tpl_vars['p']->value["ProductId"];?>
+/<?php echo $_smarty_tpl->tpl_vars['p']->value["Price"];?>
+" class="btn-buy" onclick="return confirm(' Czy na pewno chcesz złożyć zamówienie na <?php echo $_smarty_tpl->tpl_vars['p']->value["ProductName"];?>
+? ')">Zamów teraz</a></div></div>
 <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
@@ -100,7 +100,7 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </div>
 <section>
     <header class="section-header">
-        <h2>Dla członków Wspierających</h2>
+        <h2>Dla członków wpłacających</h2>
         <p>WSZYSTKIE MATERIAŁY SĄ ZA DARMO!</p>
     </header>
     

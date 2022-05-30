@@ -1,7 +1,6 @@
 {if $msgs->isMessage()}
-    <section class="breadcrumbs">
+    <section>
         <div class="container" data-aos="fade-up">
-        <h2> Dostępne wiadomości: </h2>
             <header class="section-header">
                 {foreach $msgs->getMessages() as $msg}
                     {strip}

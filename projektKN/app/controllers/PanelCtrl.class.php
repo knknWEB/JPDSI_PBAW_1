@@ -33,7 +33,6 @@ class PanelCtrl {
                     "Surname",
                     "Login",
                     "Mail",
-                    "Role",
                 ],["Login" =>$this->records]);
         } catch (\PDOException $e) {
             Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
@@ -52,7 +51,7 @@ class PanelCtrl {
                     "Description",
                     "UsersLogin",
                 ],["UsersLogin" =>$this->records]);
-            RoleUtils::addRole('TypeOfMember');
+           
         } catch (\PDOException $e) {
             Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
             if (App::getConf()->debug){
@@ -78,13 +77,31 @@ class PanelCtrl {
             }
             App::getRouter()->forwardTo('panel');
         }
+
+        try {
+            $this->orders = App::getDB()->select("order",[
+                    "OrderId",
+                    "OrderDate",
+                    "Price",
+                    "ProductId",
+                    "UsersLogin"
+                ],["UsersLogin" =>$this->records]);
+           
+        } catch (\PDOException $e) {
+            Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
+            if (App::getConf()->debug){
+                Utils::addErrorMessage($e->getMessage());
+                App::getRouter()->forwardTo('panel');
+            }
+            App::getRouter()->forwardTo('panel');
+        }
         $this->generateView(); 
     }
 
     public function generateView() {
         App::getSmarty()->assign('infos', $this->records);  // lista rekordów z bazy danych
         App::getSmarty()->assign('users', $this->userData[0]);  // lista rekordów z bazy danych
-        
+        App::getSmarty()->assign('orders', $this->orders);
         //kontrola danych dla widoku, czy w bazie jest dany czlonek, czy go nie ma
         if(isset($this->participantData[0])){
             App::getSmarty()->assign('participant', $this->participantData[0]);  

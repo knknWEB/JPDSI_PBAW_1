@@ -7,6 +7,7 @@ use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
+use core\Validator;
 use app\forms\AddressForm;
 
 class AddressCtrl {
@@ -22,30 +23,53 @@ class AddressCtrl {
     }
 
     public function validate() {
-        $this->form->postcode = ParamUtils::getFromRequest('postcode');
-        $this->form->city = ParamUtils::getFromRequest('city');
-        $this->form->street = ParamUtils::getFromRequest('street');
-        $this->form->nofHouse = ParamUtils::getFromRequest('nofHouse');
-        $this->form->nofFlat = ParamUtils::getFromRequest('nofFlat');
 
-        //nie ma sensu walidować dalej, gdy brak parametrów
-        if (!isset($this->form->postcode))
-            return false;
-
-        // sprawdzenie, czy potrzebne wartości zostały przekazane
-        if (empty($this->form->postcode)) {
-            Utils::addErrorMessage('Nie podano kodu pocztowego!');
+        $v = new Validator();
+        $this->postcode = $v->validateFromRequest("postcode", [
+        'trim' => true,
+        'required' => true,
+        'required_message' => 'Kod pocztowy jest wymagany!',
+        'min_length' => 5,
+        'max_length' => 6,
+        'validator_message' => 'Kod pocztowy mieści się między 5, a 6 znaków!',
+        ]);
+        if  ($v->isLastOk()) {
+            $this->city = $v->validateFromRequest("city", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Miasto jest wymagane',
+                'min_length' => 3,
+                'max_length' => 30,
+                'validator_message' => 'Miasto powinno mieć 3-30 znaków!',
+            ]);
         }
-        if (empty($this->form->city)) {
-            Utils::addErrorMessage('Nie podano miasta!');
+        if  ($v->isLastOk()) {
+            $this->street = $v->validateFromRequest("street", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Ulica jest wymagana',
+                'min_length' => 3,
+                'max_length' => 30,
+                'validator_message' => 'Ulica powinna mieć 3-30 znaków!',
+            ]);
         }
-        if (empty($this->form->street)) {
-            Utils::addErrorMessage('Nie podano ulicy!');
+        if  ($v->isLastOk()) {
+            $this->nofHouse = $v->validateFromRequest("nofHouse", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Numer domu wymagany',
+                'int' => true,
+                'validator_message' => 'Numer domu musi być liczbą całkowitą!',
+            ]);
         }
-        if (empty($this->form->nofHouse)) {
-            Utils::addErrorMessage('Nie podano numeru domu!');
+        if  ($v->isLastOk()) {
+            $this->nofFlat = $v->validateFromRequest("nofFlat", [
+                'trim' => true,
+                'required' => false,
+                'int' => true,
+                'validator_message' => 'Numer domu musi być liczbą całkowitą!',
+            ]);
         }
-
 
         return !App::getMessages()->isError();
     }
@@ -61,11 +85,11 @@ class AddressCtrl {
             }
             try{
                 $this->records = App::getDB()-> insert("address", [
-                "city"=>$this->form->city,
-                "postcode"=>$this->form->postcode,
-                "street"=> $this->form->street,
-                "nofHouse"=>  $this->form->nofHouse,
-                "nofFlat"=>  $this->form->nofFlat,
+                "city"=>$this->city,
+                "postcode"=>$this->postcode,
+                "street"=> $this->street,
+                "nofHouse"=>  $this->nofHouse,
+                "nofFlat"=>  $this->nofFlat,
                 "UsersLogin"=> $this->user
                 ]);
                 App::getMessages()->addMessage(new \core\Message("Poprawnie wypełniono adres!", \core\Message::INFO));

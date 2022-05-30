@@ -7,13 +7,13 @@ use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
+use core\Validator;
 use app\forms\QuestForm;
 
 
 class QuestCtrl {
     private $records;
     private $form;
-
     private $user;
 
 
@@ -23,20 +23,29 @@ class QuestCtrl {
     }
 
     public function validate() {
-        $this->form->typeMember = ParamUtils::getFromRequest('typeMember');
-        $this->form->value = ParamUtils::getFromRequest('value');
-        $this->form->description = ParamUtils::getFromRequest('description');
 
-
-        // sprawdzenie, czy potrzebne wartości zostały przekazane
-        if (empty($this->form->typeMember)) {
-            Utils::addErrorMessage('Nie podano typu członkostwa!');
+        $v = new Validator();
+        $this->typeMember = $v->validateFromRequest("typeMember", [
+        'required' => true,
+        'required_message' => 'Typ członkostwa jest wymagany!',
+        ]);
+        if  ($v->isLastOk()) {
+            $this->value = $v->validateFromRequest("value", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Wartość wymagana',
+                'numeric' => true,
+                'validator_message' => 'Wartość powinna być liczbą!',
+            ]);
         }
-        if (empty($this->form->value)) {
-            Utils::addErrorMessage('Nie podano wartości szkody!');
-        }
-        if (empty($this->form->description)) {
-            Utils::addErrorMessage('Nie podano opisu!');
+        if  ($v->isLastOk()) {
+            $this->description = $v->validateFromRequest("description", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Opis wymagany!',
+                'min_length' => 10,
+                'validator_message' => 'Opis powinien miec minimum 10 znaków!',
+            ]);
         }
         return !App::getMessages()->isError();
     }
@@ -51,11 +60,12 @@ class QuestCtrl {
                 try{
                     $this->records = App::getDB()-> insert("participant", [
                     "ParticipeDate"=>date("Y-m-d M:i:s"),
-                    "TypeOfMember"=>$this->form->typeMember,
-                    "ValueLoss"=> $this->form->value,
-                    "Description"=>  $this->form->description,
+                    "TypeOfMember"=>$this->typeMember,
+                    "ValueLoss"=> $this->value,
+                    "Description"=>  $this->description,
                     "UsersLogin"=> $this->user
                     ]);
+                    RoleUtils::addRole($this->typeMember);
                     App::getMessages()->addMessage(new \core\Message("Poprawnie wypełniono ankietę członkostwa!!", \core\Message::INFO));
                     App::getRouter()->forwardTo('panel');
                 } catch (\PDOException $e) { 

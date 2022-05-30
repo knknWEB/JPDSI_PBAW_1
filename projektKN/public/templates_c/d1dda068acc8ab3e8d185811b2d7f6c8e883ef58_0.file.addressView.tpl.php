@@ -1,42 +1,42 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-22 16:16:45
+/* Smarty version 4.1.0, created on 2022-05-29 18:08:39
   from 'C:\xampp\htdocs\projektKN\app\views\addressView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_628a45cdca78d8_11311503',
+  'unifunc' => 'content_62939a879c65e0_91015853',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd1dda068acc8ab3e8d185811b2d7f6c8e883ef58' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\addressView.tpl',
-      1 => 1653228985,
+      1 => 1653836677,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
-    'file:messages.tpl' => 1,
+    'file:messagesForm.tpl' => 1,
   ),
 ),false)) {
-function content_628a45cdca78d8_11311503 (Smarty_Internal_Template $_smarty_tpl) {
+function content_62939a879c65e0_91015853 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_824544683628a45cdc99e66_33985889', 'hero');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_117617567062939a879b76b2_99500245', 'hero');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'hero'} */
-class Block_824544683628a45cdc99e66_33985889 extends Smarty_Internal_Block
+class Block_117617567062939a879b76b2_99500245 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'hero' => 
   array (
-    0 => 'Block_824544683628a45cdc99e66_33985889',
+    0 => 'Block_117617567062939a879b76b2_99500245',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -79,7 +79,7 @@ address" method="post" class="pure-form bottom-margin">
                 <div class="col-lg-12">
                     <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">Zatwierdź<i class="bi bi-arrow-right"></i></button>
                 </div>
-            <?php $_smarty_tpl->_subTemplateRender("file:messages.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+            <?php $_smarty_tpl->_subTemplateRender("file:messagesForm.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
             </fieldset>
         </form>	

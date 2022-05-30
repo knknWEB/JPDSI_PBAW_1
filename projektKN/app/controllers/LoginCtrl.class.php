@@ -4,8 +4,7 @@ namespace app\controllers;
 
 use core\App;
 use core\Utils;
-use core\Messages;
-use core\Message;
+use core\Validator;
 use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
@@ -15,6 +14,8 @@ class LoginCtrl {
 
     private $form;
     private $records;
+    private $pass;
+    private $login;
 
     public function __construct() {
         //stworzenie potrzebnych obiektów
@@ -22,32 +23,45 @@ class LoginCtrl {
     }
 
     public function validate() {
-        $this->form->login = ParamUtils::getFromRequest('login');
-        $this->form->pass = ParamUtils::getFromRequest('pass');
 
-        //nie ma sensu walidować dalej, gdy brak parametrów
-        if (!isset($this->form->login))
-            return false;
-
-        // sprawdzenie, czy potrzebne wartości zostały przekazane
-        if (empty($this->form->login)) {
-            Utils::addErrorMessage('Nie podano loginu');
+        $v = new Validator();
+        $this->login = $v->validateFromRequest("login", [
+        'trim' => true,
+        'required' => true,
+        'required_message' => 'Podanie loginu jest wymagane!'
+        ]);
+        if  ($v->isLastOk()) {
+            $this->pass = $v->validateFromRequest("pass", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Podanie hasła jest wymagane!',
+            ]);
+                //operacja sprawdzenia czy uzytkownik o podanych danych jest w BD
+                if (App::getDB()->has("users",[
+                    "AND" => [
+                    "Login" => $this->login],
+                    "Password" => $this->pass, ])){
+                    //jezeli jest, sprawdzenie czy uzytkownik jest w bazie uczestnik i czy mozna przypisac mu jego role        
+                    $existRole=App::getDB()->select("participant", "TypeOfMember", [
+                        "UsersLogin" => $this->login
+                    ]);
+                    if($existRole!=NULL){
+                    RoleUtils::addRole($existRole[0]);
+                    }
+                    //jezeli nie ma roli, dodanie domyslnej roli "logged"
+                    else{
+                        RoleUtils::addRole('logged');
+                    }
+                    SessionUtils::storeObject('Login', $this->login); 
+                } 
+                else{
+                    Utils::addErrorMessage('Błędny login lub hasło!');   
+                }
         }
-        if (empty($this->form->pass)) {
-            Utils::addErrorMessage('Nie podano hasła');
-        }
+        
 
 
-        if (App::getDB()->has("users",[
-            "AND" => [
-            "Login" => $this->form->login],
-            "Password" => $this->form->pass, ])){
-            RoleUtils::addRole('logged');
-            SessionUtils::storeObject('Login', $this->form->login); 
-        } 
-        else{
-            Utils::addErrorMessage('Błędny login lub hasło!');   
-        }
+    
 
         return !App::getMessages()->isError();
     }
@@ -70,6 +84,9 @@ class LoginCtrl {
 
     public function action_logout() {
         // 1. zakończenie sesji
+        RoleUtils::removeRole("logged");
+        RoleUtils::removeRole("Wpłacający");
+        RoleUtils::removeRole("Wspierający");
         session_unset();
         session_destroy();
        

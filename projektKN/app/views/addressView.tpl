@@ -32,7 +32,7 @@
                 <div class="col-lg-12">
                     <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">Zatwierdź<i class="bi bi-arrow-right"></i></button>
                 </div>
-            {include file="messages.tpl"}
+            {include file="messagesForm.tpl"}
             </fieldset>
         </form>	
 

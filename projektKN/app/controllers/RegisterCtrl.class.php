@@ -6,7 +6,9 @@ use core\App;
 use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
+use core\Validator;
 use app\forms\RegisterForm;
+
 use PDOException;
 
 
@@ -21,61 +23,103 @@ class RegisterCtrl {
     }
 
     public function validate() {
-        $this->form->name = ParamUtils::getFromRequest('name');
-        $this->form->surname = ParamUtils::getFromRequest('surname');
-        $this->form->mail = ParamUtils::getFromRequest('mail');
-        $this->form->login = ParamUtils::getFromRequest('login');
-        $this->form->pass = ParamUtils::getFromRequest('pass');
-        $this->form->pass2 = ParamUtils::getFromRequest('pass2');
 
-        //nie ma sensu walidować dalej, gdy brak parametrów
-        if (!isset($this->form->login))
-            return false;
-        // sprawdzenie, czy potrzebne wartości zostały przekazane
-        if (empty($this->form->name)) {
-            Utils::addErrorMessage('Nie podano imienia');
+        $v = new Validator();
+        $this->name = $v->validateFromRequest("name", [
+        'trim' => true,
+        'required' => true,
+        'required_message' => 'Imię jest wymagane!',
+        'min_length' => 3,
+        'max_length' => 30,
+        'validator_message' => 'Imię powinno mieć 3-30 znaków!',
+        ]);
+        if  ($v->isLastOk()) {
+            $this->surname = $v->validateFromRequest("surname", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Nazwisko jest wymagane',
+                'min_length' => 3,
+                'max_length' => 30,
+                'validator_message' => 'Nazwisko powinno mieć 3-30 znaków!',
+            ]);
         }
-        if (empty($this->form->surname)) {
-            Utils::addErrorMessage('Nie podano nazwiska');
+        if  ($v->isLastOk()) {
+            $this->mail = $v->validateFromRequest("mail", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Adres e-mail jest wymagany!',
+                'email' => true,
+                'validator_message' => 'Błędny mail! Adres e-mail powinien wyglądać: example@stopdlaodlewni.pl',
+            ]);
         }
-        if (empty($this->form->mail)) {
-            Utils::addErrorMessage('Nie podano adresu e-mail');
-        }
-        if (empty($this->form->login)) {
-            Utils::addErrorMessage('Nie podano loginu');
-        }
-        if (empty($this->form->pass)) {
-            Utils::addErrorMessage('Nie podano hasła');
-        }
-        if (empty($this->form->pass2)) {
-            Utils::addErrorMessage('Nie potwierdzono hasła');
-        }
+        if  ($v->isLastOk()) {
 
+
+            // $existMail = App::getDB()->count("users",[
+            //     "Mail" => $mail
+            // ]);
+
+            // $v2 = $v->validate($existMail, [
+
+            //     'min' => '2',
+            //     'validator_message' => 'Niepoprawna liczba całkowita'
+            // ]);
+            
+            
+            //sprawdzenie, czy nie ma rekordów o tym samym mailu
+            $existMail = App::getDB()->count("users",[
+                "Mail" => $this->mail
+            ]);
+            if($existMail!=0){
+                Utils::addErrorMessage('Użytkownik o takim e-mailu już istnieje!');
+            }
+
+        }
+        if  ($v->isLastOk()) {
+            $this->login = $v->validateFromRequest("login", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Login jest wymagany!',
+                'min_length' => 3,
+                'max_length' => 30,
+                'validator_message' => 'Login powinien mieć 3-30 znaków!',
+            ]);
+        }
+        if  ($v->isLastOk()) {
+             //sprawdzenie, czy nie ma rekordów o tym samym loginie
+            $existLogin = App::getDB()->count("users",[
+                "Login" => $this->login
+            ]);
+            if($existLogin!=0){
+                Utils::addErrorMessage('Użytkownik o takim loginie już istnieje!');
+            }
+            $this->password = $v->validateFromRequest("pass", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Hasło jest wymagane!',
+                'min_length' => 8,
+                'max_length' => 30,
+                'validator_message' => 'Hasło powininno mieć 8-30 znaków!',
+            ]);
+        }
+        if  ($v->isLastOk()) {
+            $this->password2 = $v->validateFromRequest("pass2", [
+                'trim' => true,
+                'required' => true,
+                'required_message' => 'Drugie hasło jest wymagane!',
+                'min_length' => 8,
+                'max_length' => 30,
+                'validator_message' => 'Hasło powininno mieć 8-30 znaków!',
+            ]);
+            if (!($this->password == $this->password2)) {
+                Utils::addErrorMessage('Hasła się nie zgadzają!');
+            }
+        }
+       
         //nie ma sensu walidować dalej, gdy brak wartości
         if (App::getMessages()->isError())
             return false;
-
-        // sprawdzenie, czy hasła się zgadzają
-        if (!($this->form->pass == $this->form->pass2)) {
-            Utils::addErrorMessage('Hasła się nie zgadzają!');
-        }
-
-        //sprawdzenie, czy nie ma rekordów o tym samym mailu
-        $existMail = App::getDB()->count("users",[
-                    "Mail" => $this->form->mail
-        ]);
-        if($existMail!=0){
-            Utils::addErrorMessage('Użytkownik o takim e-mailu już istnieje!');
-        }
-
-        //sprawdzenie, czy nie ma rekordów o tym samym loginie
-        $existMail = App::getDB()->count("users",[
-            "Login" => $this->form->login
-        ]);
-        if($existMail!=0){
-            Utils::addErrorMessage('Użytkownik o takim loginie już istnieje!');
-        }
-            return !App::getMessages()->isError();
+        return !App::getMessages()->isError();
     }
 
 
@@ -87,11 +131,11 @@ class RegisterCtrl {
         if ($this->validate()) {
             try{
                 $this->records = App::getDB()-> insert("users", [
-                "Name"=> $this->form->name,
-                "Surname"=>$this->form->surname,
-                "Mail"=> $this->form->mail,
-                "Login"=>  $this->form->login,
-                "Password"=> $this->form->pass
+                "Name"=>  $this->name,
+                "Surname"=> $this->surname,
+                "Mail"=>  $this->mail,
+                "Login"=>   $this->login,
+                "Password"=>  $this->password
                
                 ]);
             } catch (\PDOException $e) {

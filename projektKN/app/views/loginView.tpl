@@ -19,7 +19,7 @@
                 <div class="col-lg-12">
                     <button type="submit" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center"/>Zaloguj się<i class="bi bi-arrow-right"></i></button>
                 </div>
-                {include file="messages.tpl"}
+                {include file="messagesForm.tpl"}
             </fieldset>
         </form>	
         <div class="col-lg-12 d-flex flex-column justify-content-center">
