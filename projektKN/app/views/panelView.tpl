@@ -102,30 +102,6 @@
                 </div>
                 
             </div>
-
-            {* <div>
-            <div class="col-lg-12">
-                <div class="post-box">
-                    
-                <h3 class="post-title">Złożone zamówienia: </h3>
-                    <table >
-                        <thead>
-                        {foreach $orders as $o}
-                            {strip}
-                                  <ul>
-                                    <li>stopdlaodlewni.pl</li>
-                                    <li>Rozmiar: <b>{$o["OrderId"]}</b></li>
-                                    <li>Ilość w opakowaniu: {$o["ProductId"]}</li>
-                                  </ul>
-                                </div>
-                              </div>
-                            {/strip}
-                        {/foreach}
-                        </thead>
-                    </table>
-                </div>
-            </div>
-             *}
         {include file="newsPanel.tpl"}
     </section>
 {/block}

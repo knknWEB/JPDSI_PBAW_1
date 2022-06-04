@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-28 19:05:35
+/* Smarty version 4.1.0, created on 2022-06-04 16:32:55
   from 'C:\xampp\htdocs\projektKN\app\views\panelView.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_6292565f5188d6_10806496',
+  'unifunc' => 'content_629b6d171dd1d0_31384889',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd56f18e847f028dfd33c9b4fb9e84bcfd04aacec' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\panelView.tpl',
-      1 => 1653757532,
+      1 => 1654353134,
       2 => 'file',
     ),
   ),
@@ -22,24 +22,24 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:newsPanel.tpl' => 1,
   ),
 ),false)) {
-function content_6292565f5188d6_10806496 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629b6d171dd1d0_31384889 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_17758999116292565f4da684_62527877', 'about');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_248649801629b6d1715e957_87573994', 'about');
 ?>
 
 <?php $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'about'} */
-class Block_17758999116292565f4da684_62527877 extends Smarty_Internal_Block
+class Block_248649801629b6d1715e957_87573994 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'about' => 
   array (
-    0 => 'Block_17758999116292565f4da684_62527877',
+    0 => 'Block_248649801629b6d1715e957_87573994',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -169,8 +169,7 @@ questView"> Uzupełnij ankietę!<a><?php }?>
                 </div>
                 
             </div>
-
-                    <?php $_smarty_tpl->_subTemplateRender("file:newsPanel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
+        <?php $_smarty_tpl->_subTemplateRender("file:newsPanel.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
     </section>
 <?php

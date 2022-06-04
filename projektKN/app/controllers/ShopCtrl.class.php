@@ -29,19 +29,20 @@ class ShopCtrl {
             App::getRouter()->forwardTo('login');
         }    
         
+        //pobranie parametrów z CleanURL - id produktu i ceny
         $this->id = ParamUtils::getFromCleanURL(1, true, 'Błędne wywołanie aplikacji! Przeniesiono na stronę startową!');
         $this->price = ParamUtils::getFromCleanURL(2, true, 'Błędne wywołanie aplikacji! Przeniesiono na stronę startową!');
     
+        //sprawdzenie czy użytkownik podał adres, jeżeli nie - przekierowanie do panelu
         $existAddress=App::getDB()->count("address", "addressID", [
-
             "AND" => [
                 "UsersLogin" => [$this->records]]
-            
-            ]);
+        ]);
         if($existAddress==0){
             Utils::addErrorMessage('Aby złożyć zamówienie musisz najpierw uzupełnić adres!');
             App::getRouter()->forwardTo('panel');
         }
+        //sprawdzenie, czy użytkownik złożył dzisiaj zamówienie, jeżeli tak, przekierowanie i wyświetlenie błędu
         $existToday=App::getDB()->count("order", "OrderDate", [
 
             "AND" => [
@@ -57,6 +58,7 @@ class ShopCtrl {
     }
 
     public function action_shop() {
+        //blok instrukcji do pobrania produktów z bazy danych
             try {
                 $this->products = App::getDB()->select("product",[
                         "ProductId",
@@ -73,18 +75,22 @@ class ShopCtrl {
                 }
                 App::getRouter()->forwardTo('home');
             }
-            $this->generateView();
-       
-      
+            //sprawdzenie czy rola to wpłacający, jeżeli tak, nadanie isRole jednyki - w celu przekazania do widoku infromacji o cenie zerowej
+            if(RoleUtils::inRole('Wpłacający')){
+                $this->isRole=1;
+            }
+            else{
+                $this->isRole=0;
+            }
+            $this->generateView();      
     }
     public function action_shopBuy() {
         if ($this->validate()) {
-
+            //sprawdzenie czy rola to wpłacający, jeżeli tak, ustawienie ceny równej zero
             if(RoleUtils::inRole('Wpłacający')){
                 $this->price=0;
             }
-
-    
+            //blok instrukcji do wstawiania rekordów do bazy danych
             try{
                 $this->records = App::getDB()-> insert("order", [
                 "OrderDate"=>date("Y-m-d M:i:s"),
@@ -113,9 +119,10 @@ class ShopCtrl {
             App::getRouter()->forwardTo('home');
         }
     }
+    //generowanie widoku i przekazywanie parametrów
     public function generateView() {
         App::getSmarty()->assign('products',$this->products);
-
+        App::getSmarty()->assign('isRole',$this->isRole);
         App::getSmarty()->assign('form',$this->form);
         App::getSmarty()->display('shopView.tpl');
     }

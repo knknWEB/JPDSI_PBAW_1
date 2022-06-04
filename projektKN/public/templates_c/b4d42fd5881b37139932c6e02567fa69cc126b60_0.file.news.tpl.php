@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.1.0, created on 2022-05-29 16:21:45
+/* Smarty version 4.1.0, created on 2022-06-04 15:46:27
   from 'C:\xampp\htdocs\projektKN\app\views\news.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.1.0',
-  'unifunc' => 'content_629381790ffb52_11430226',
+  'unifunc' => 'content_629b6233dd8f52_82530137',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b4d42fd5881b37139932c6e02567fa69cc126b60' => 
     array (
       0 => 'C:\\xampp\\htdocs\\projektKN\\app\\views\\news.tpl',
-      1 => 1653834103,
+      1 => 1654350386,
       2 => 'file',
     ),
   ),
@@ -20,22 +20,22 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_629381790ffb52_11430226 (Smarty_Internal_Template $_smarty_tpl) {
+function content_629b6233dd8f52_82530137 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_loadInheritance();
 $_smarty_tpl->inheritance->init($_smarty_tpl, true);
 ?>
 
 <?php 
-$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_1288647096629381790e8830_91364322', 'about');
+$_smarty_tpl->inheritance->instanceBlock($_smarty_tpl, 'Block_988776448629b6233da5202_82891951', 'about');
 $_smarty_tpl->inheritance->endChild($_smarty_tpl, "main.tpl");
 }
 /* {block 'about'} */
-class Block_1288647096629381790e8830_91364322 extends Smarty_Internal_Block
+class Block_988776448629b6233da5202_82891951 extends Smarty_Internal_Block
 {
 public $subBlocks = array (
   'about' => 
   array (
-    0 => 'Block_1288647096629381790e8830_91364322',
+    0 => 'Block_988776448629b6233da5202_82891951',
   ),
 );
 public function callBlock(Smarty_Internal_Template $_smarty_tpl) {
@@ -76,7 +76,30 @@ $_smarty_tpl->tpl_vars['n']->do_else = false;
 </p></div></article><!-- End blog entry -->
       <?php
 }
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+      <div class="container">
+
+       <ol>
+         <a>Strona <b><?php echo $_smarty_tpl->tpl_vars['pageNumber']->value;?>
+</b> </a>z <b><?php echo $_smarty_tpl->tpl_vars['pagesNumber']->value;?>
+</b><br>
+         <a>Nawigacja: </a>
+         <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['tab']->value, 't');
+$_smarty_tpl->tpl_vars['t']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['t']->value) {
+$_smarty_tpl->tpl_vars['t']->do_else = false;
+?>
+          <a href="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+news/<?php echo $_smarty_tpl->tpl_vars['t']->value;?>
+">[strona <?php echo $_smarty_tpl->tpl_vars['t']->value;?>
+]</a>
+        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+       </ol>
+     </div>
+<?php
 }
 }
 /* {/block 'about'} */

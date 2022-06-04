@@ -23,7 +23,15 @@ class LoginCtrl {
     }
 
     public function validate() {
-
+        if(!isset($this->records)){
+            $this->records=SessionUtils::loadObject('Login', true);
+        }
+        //sprawdzenie czy w pobranych rekordach, znajduje się login z sesji, jezeli jest pusty, przekierowanie do panelu z przekazaniem wiadomosci Message.
+        if(($this->records)!=null){
+            App::getMessages()->addMessage(new \core\Message("Jesteś zarejstrowany i zalogowany! Nie ma potrzeby logowania się ponownie!", \core\Message::ERROR));
+            App::getRouter()->forwardTo('panel');
+        }
+        //walidacja danych wbudowanym walidatorem we Framework
         $v = new Validator();
         $this->login = $v->validateFromRequest("login", [
         'trim' => true,
@@ -58,11 +66,6 @@ class LoginCtrl {
                     Utils::addErrorMessage('Błędny login lub hasło!');   
                 }
         }
-        
-
-
-    
-
         return !App::getMessages()->isError();
     }
 

@@ -47,4 +47,16 @@
           </article><!-- End blog entry -->
           {/strip}
       {/foreach}
+      <div class="container">
+
+       <ol>
+         <a>Strona <b>{$pageNumber}</b> </a>z <b>{$pagesNumber}</b><br>
+         <a>Nawigacja: </a>
+         {foreach $tab as $t}
+          {strip}
+            <a href="{$conf->action_root}news/{$t}">[strona {$t}]</a>
+          {/strip}
+        {/foreach}
+       </ol>
+     </div>
 {/block}

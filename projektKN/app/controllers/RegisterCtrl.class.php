@@ -6,6 +6,7 @@ use core\App;
 use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
+use core\SessionUtils;
 use core\Validator;
 use app\forms\RegisterForm;
 
@@ -24,6 +25,16 @@ class RegisterCtrl {
 
     public function validate() {
 
+        if(!isset($this->records)){
+            $this->records=SessionUtils::loadObject('Login', true);
+        }
+        //sprawdzenie czy w pobranych rekordach, znajduje się login z sesji, jezeli jest pusty, przekierowanie do panelu z przekazaniem wiadomosci Message.
+        if(($this->records)!=null){
+            App::getMessages()->addMessage(new \core\Message("Jesteś zarejstrowany i zalogowany! Aby utworzyć konto wyloguj się!", \core\Message::ERROR));
+            App::getRouter()->forwardTo('panel');
+        }
+
+        //walidacja parametrów wbudowanym we Framework walidatorem
         $v = new Validator();
         $this->name = $v->validateFromRequest("name", [
         'trim' => true,
@@ -53,19 +64,6 @@ class RegisterCtrl {
             ]);
         }
         if  ($v->isLastOk()) {
-
-
-            // $existMail = App::getDB()->count("users",[
-            //     "Mail" => $mail
-            // ]);
-
-            // $v2 = $v->validate($existMail, [
-
-            //     'min' => '2',
-            //     'validator_message' => 'Niepoprawna liczba całkowita'
-            // ]);
-            
-            
             //sprawdzenie, czy nie ma rekordów o tym samym mailu
             $existMail = App::getDB()->count("users",[
                 "Mail" => $this->mail
@@ -73,7 +71,6 @@ class RegisterCtrl {
             if($existMail!=0){
                 Utils::addErrorMessage('Użytkownik o takim e-mailu już istnieje!');
             }
-
         }
         if  ($v->isLastOk()) {
             $this->login = $v->validateFromRequest("login", [
@@ -115,14 +112,11 @@ class RegisterCtrl {
                 Utils::addErrorMessage('Hasła się nie zgadzają!');
             }
         }
-       
-        //nie ma sensu walidować dalej, gdy brak wartości
+        //zwrócenie false jeżeli wystąpiły błedy
         if (App::getMessages()->isError())
             return false;
         return !App::getMessages()->isError();
     }
-
-
     public function action_registerShow() {
         $this->generateView();
     }
@@ -146,15 +140,12 @@ class RegisterCtrl {
             App::getMessages()->addMessage(new \core\Message("'Poprawnie zarejestrowano! Teraz zaloguj się!'", \core\Message::INFO));
             App::getRouter()->forwardTo('home');
         } else {
-            //niezalogowany => pozostań na stronie logowania
             $this->generateView();
         }
     }
-
-
-
+//generowanie widoku i przekazanie danych
     public function generateView() {
-        App::getSmarty()->assign('form', $this->form); // dane formularza do widoku
+        App::getSmarty()->assign('form', $this->form);
         App::getSmarty()->display('RegisterView.tpl');
         
     }

@@ -2,7 +2,11 @@
 {block name=hero} 
     <section class="breadcrumbs">
         <div class="container">
-            <h1 >Sklep materiałów reklamowych </h1>
+        <ol>
+        <li><a href="{$conf->action_root}">Strona główna</a></li>
+        <li>Sklep</li>
+      </ol>
+      <h2>Sklep materiałów reklamowych</h2>
         </div>
     </section>
 {/block}
@@ -13,7 +17,7 @@
 
   <header class="section-header">
     <h2>Materiały reklamowe</h2>
-    <p>Zapoznaj się z ofertą!</p>
+    <p>{if $isRole eq 1}Jesteś członkiem wpłacającym. Materiały są darmowe! {else}Zapoznaj się z ofertą!{/if}</p>
   </header>
 
   <div class="row gy-4" data-aos="fade-left">
@@ -22,7 +26,10 @@
         <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
         <div class="box">
           <h3 >{$p["ProductName"]}</h3>
-            <div class="price"><sup>PLN</sup>{$p["Price"]}<span> / 00</span></div>
+            <div class="price"><sup>PLN</sup>
+            {if $isRole eq 1}0
+            {else}{$p["Price"]}{/if}
+            <span> / 00</span></div>
           <img  width="99%" src="{$conf->app_url}/img/shop/{$p["ProductId"]}.png" />
           <ul>
             <li>stopdlaodlewni.pl</li>
@@ -43,6 +50,5 @@
     </header>
     
 </section>
-
-</section><!-- End Pricing Section -->
+</section>
 {/block}

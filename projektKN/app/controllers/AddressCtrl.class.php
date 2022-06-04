@@ -65,7 +65,6 @@ class AddressCtrl {
         if  ($v->isLastOk()) {
             $this->nofFlat = $v->validateFromRequest("nofFlat", [
                 'trim' => true,
-                'required' => false,
                 'int' => true,
                 'validator_message' => 'Numer domu musi być liczbą całkowitą!',
             ]);
@@ -104,8 +103,8 @@ class AddressCtrl {
             }
             
         } else {
-            //niezalogowany => pozostań na stronie logowania
-            Utils::addErrorMessage('Nie dziala walidacja!');
+            //wystąpi jak uzytkownik wejdzie na stronę, za pomocą URL i parametru, wtedy wystąpi bład
+            Utils::addErrorMessage('Wystąpił błąd. Ponów operację.');
             $this->generateView();
         }
 

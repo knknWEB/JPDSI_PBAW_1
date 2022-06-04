@@ -15,15 +15,12 @@ class QuestCtrl {
     private $records;
     private $form;
     private $user;
-
-
+    //stworzenie obiektów - z formularza
     public function __construct() {
-        //stworzenie potrzebnych obiektów
         $this->form = new QuestForm();
     }
-
+    //walidacja wbudwoanym walidatorem z Frameworku
     public function validate() {
-
         $v = new Validator();
         $this->typeMember = $v->validateFromRequest("typeMember", [
         'required' => true,
@@ -49,14 +46,12 @@ class QuestCtrl {
         }
         return !App::getMessages()->isError();
     }
-
     public function action_quest() {
-
-
             if ($this->validate()) {
                 if(!isset($this->user)){
                     $this->user=SessionUtils::loadObject('Login', true);
                 }
+                //blok instrukcji do wstawienia danych do tabeli uczestnik
                 try{
                     $this->records = App::getDB()-> insert("participant", [
                     "ParticipeDate"=>date("Y-m-d M:i:s"),
@@ -77,24 +72,14 @@ class QuestCtrl {
                     App::getRouter()->forwardTo('panel');
                 }
             } else {
-                //niezalogowany => pozostań na stronie logowania
-                Utils::addErrorMessage('Nie dziala walidacja!');
+                Utils::addErrorMessage('Wystąpił błąd!');
                 $this->generateView();
             }
-          
-
     }
-
     public function action_questView() {
-    
         $this->generateView();
-    
-
-          
-
     }
 
-       
     public function generateView() {
         App::getSmarty()->display('questView.tpl');
     }

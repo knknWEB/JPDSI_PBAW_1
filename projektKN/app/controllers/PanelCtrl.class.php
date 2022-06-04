@@ -8,7 +8,6 @@ use core\RoleUtils;
 use core\ParamUtils;
 use core\SessionUtils;
 
-
 class PanelCtrl {
     private $records;
     private $mail;
@@ -26,6 +25,7 @@ class PanelCtrl {
             App::getMessages()->addMessage(new \core\Message("Aby wejść do panelu, musisz się zalogować!", \core\Message::ERROR));
             App::getRouter()->forwardTo('login');
         }
+        //blok isntrukcji do pobrania informacji o uzytkowniku
         try {
             $this->userData = App::getDB()->select("users",[
                     "UserId",
@@ -42,6 +42,7 @@ class PanelCtrl {
             }
             App::getRouter()->forwardTo('panel');
         }
+        //blok isntrukcji do pobrania informacji o czlonkowstwie
         try {
             $this->participantData = App::getDB()->select("participant",[
                     "ParticipantId",
@@ -51,7 +52,6 @@ class PanelCtrl {
                     "Description",
                     "UsersLogin",
                 ],["UsersLogin" =>$this->records]);
-           
         } catch (\PDOException $e) {
             Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
             if (App::getConf()->debug){
@@ -60,6 +60,7 @@ class PanelCtrl {
             }
             App::getRouter()->forwardTo('panel');
         }
+        //blok isntrukcji do pobrania informacji o adresie
         try {
             $this->address = App::getDB()->select("address",[
                     "city",
@@ -77,31 +78,12 @@ class PanelCtrl {
             }
             App::getRouter()->forwardTo('panel');
         }
-
-        try {
-            $this->orders = App::getDB()->select("order",[
-                    "OrderId",
-                    "OrderDate",
-                    "Price",
-                    "ProductId",
-                    "UsersLogin"
-                ],["UsersLogin" =>$this->records]);
-           
-        } catch (\PDOException $e) {
-            Utils::addErrorMessage('Wystąpił błąd podczas pobierania rekordów: ');
-            if (App::getConf()->debug){
-                Utils::addErrorMessage($e->getMessage());
-                App::getRouter()->forwardTo('panel');
-            }
-            App::getRouter()->forwardTo('panel');
-        }
         $this->generateView(); 
     }
 
     public function generateView() {
         App::getSmarty()->assign('infos', $this->records);  // lista rekordów z bazy danych
         App::getSmarty()->assign('users', $this->userData[0]);  // lista rekordów z bazy danych
-        App::getSmarty()->assign('orders', $this->orders);
         //kontrola danych dla widoku, czy w bazie jest dany czlonek, czy go nie ma
         if(isset($this->participantData[0])){
             App::getSmarty()->assign('participant', $this->participantData[0]);  
@@ -128,8 +110,6 @@ class PanelCtrl {
         else if ($this->address==null){
             App::getSmarty()-> assign('address_no_is',1);
         }
-   
-
         App::getSmarty()->display('panelView.tpl');
     }
 }

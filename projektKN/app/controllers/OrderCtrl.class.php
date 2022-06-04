@@ -13,7 +13,6 @@ class OrderCtrl {
     private $records;
     private $orders;
 
-
     public function validate() {
         if(!isset($this->records)){
             $this->records=SessionUtils::loadObject('Login', true);
@@ -28,6 +27,7 @@ class OrderCtrl {
     }
     public function action_orders() {
         if ($this->validate()) {
+            //pobranie listy zamówień z bazy danych
             $this->orders = App::getDB()->select("order", [
                 "[><]product" => ["ProductId" => "ProductId", "AND" => [
                     "Order.UsersLogin" => $this->records]]
@@ -46,7 +46,6 @@ class OrderCtrl {
             $this->generateView();
         }
     }
-       
     public function generateView() {
         App::getSmarty()->assign('orders',$this->orders);
         App::getSmarty()->assign('records',$this->records);
